@@ -20,6 +20,8 @@ import android.widget.TextView;
 
 public class ResultActivity extends AppCompatActivity {
 
+    private String conversion;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,9 +32,10 @@ public class ResultActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        String currencyConversion = (String) getIntent().getExtras().get("currencyConversion");
-        TextView textView = findViewById(R.id.result);
-        textView.setText(currencyConversion);
+        conversion = getIntent().getExtras().getString("currencyConversion");
+        ResultFragment resultFragment = (ResultFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_result);
+        resultFragment.setConversionText(conversion);
+
     }
 
     @Override

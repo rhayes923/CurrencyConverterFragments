@@ -10,6 +10,7 @@ package edu.quinnipiac.ser210.currencyconverter;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -24,6 +25,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import androidx.appcompat.widget.ShareActionProvider;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -35,7 +38,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class MainActivity extends AppCompatActivity {
+import javax.xml.transform.Result;
+
+public class MainActivity extends AppCompatActivity implements MainFragment.OnFragmentInteractionListener {
     CurrencyHandler crHandler = new CurrencyHandler();
     ShareActionProvider provider;
     boolean userSelect = false;
@@ -49,15 +54,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Spinner spinner1 = findViewById(R.id.spinner1);
-        Spinner spinner2 = findViewById(R.id.spinner2);
         Button button = findViewById(R.id.button);
-
-        ArrayAdapter<String> currencyAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, crHandler.currencies);
-        currencyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner1.setAdapter(currencyAdapter);
-        spinner2.setAdapter(currencyAdapter);
 
         //Listener for the conversion button
         button.setOnClickListener(new View.OnClickListener() {
@@ -78,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 
     @Override
     public void onUserInteraction() {
@@ -192,10 +190,24 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             if (result != null) {
-                Intent intent = new Intent(MainActivity.this, ResultActivity.class);
-                intent.putExtra("currencyConversion", result);
-                startActivity(intent);
+                setConversion(result);
             }
+        }
+    }
+
+    public void setConversion(String result) {
+        View fragmentContainer = findViewById(R.id.fragment_container);
+        if (fragmentContainer != null) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ResultFragment resultFragment = new ResultFragment();
+            resultFragment.setConversionText(result);
+            ft.replace(R.id.fragment_container, resultFragment);
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            ft.commit();
+        } else {
+            Intent intent = new Intent(this, ResultActivity.class);
+            intent.putExtra("currencyConversion", result);
+            startActivity(intent);
         }
     }
 }

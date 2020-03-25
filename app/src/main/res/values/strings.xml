@@ -9,4 +9,7 @@
         which retrieves the currency conversion. \n\nSelect a currency from the first spinner that you want to convert from,
         and a second currency from the second spinner that you want to convert to, then specify an amount and press convert.
     </string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
