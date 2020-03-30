@@ -1,6 +1,6 @@
 /**
  * Ryan Hayes
- * 2/27/20
+ * 3/30/20
  * CurrencyHandler.java
  *
  * This class includes the array of available currencies

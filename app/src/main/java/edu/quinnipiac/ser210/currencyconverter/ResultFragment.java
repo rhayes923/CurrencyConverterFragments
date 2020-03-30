@@ -1,7 +1,13 @@
+/**
+ * Ryan Hayes
+ * 3/30/20
+ * ResultFragment.java
+ *
+ * This is the result fragment that displays the currency conversion that the user had selected.
+ */
+
 package edu.quinnipiac.ser210.currencyconverter;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;

@@ -1,6 +1,6 @@
 /**
  * Ryan Hayes
- * 2/27/20
+ * 3/30/20
  * HelpActivity.java
  *
  * This class handles the activity that displays the help and information screen.

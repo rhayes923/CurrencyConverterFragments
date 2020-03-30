@@ -1,6 +1,6 @@
 /**
  * Ryan Hayes
- * 2/27/20
+ * 3/30/20
  * MainActivity.java
  *
  * This is the main java class that handles most of the application including AsyncTask.
@@ -10,7 +10,6 @@ package edu.quinnipiac.ser210.currencyconverter;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
@@ -21,11 +20,9 @@ import androidx.core.view.MenuItemCompat;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import androidx.appcompat.widget.ShareActionProvider;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.widget.LinearLayout;
@@ -37,8 +34,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
-import javax.xml.transform.Result;
 
 public class MainActivity extends AppCompatActivity implements MainFragment.OnFragmentInteractionListener {
     CurrencyHandler crHandler = new CurrencyHandler();
@@ -61,11 +56,9 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnFr
             @Override
             public void onClick(View v) {
                 if (userSelect) {
-                    Spinner spinner1 = findViewById(R.id.spinner1);
-                    Spinner spinner2 = findViewById(R.id.spinner2);
+                    String option1 = ((Spinner) findViewById(R.id.spinner1)).getSelectedItem().toString();
+                    String option2 = ((Spinner) findViewById(R.id.spinner2)).getSelectedItem().toString();
                     EditText editText = findViewById(R.id.editText);
-                    String option1 = spinner1.getSelectedItem().toString();
-                    String option2 = spinner2.getSelectedItem().toString();
                     int amount = Integer.valueOf(editText.getText().toString());
                     if (option1 != "Select Currency" && option2 != "Select Currency") {
                         String params = "?from=" + option1 + "&to=" + option2 + "&amount=" + amount;
@@ -195,6 +188,8 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnFr
         }
     }
 
+    //Method that will either display the conversion in a fragment if the screen is large
+    //or it will display the conversion in a new activity if the screen is small.
     public void setConversion(String result) {
         View fragmentContainer = findViewById(R.id.fragment_container);
         if (fragmentContainer != null) {

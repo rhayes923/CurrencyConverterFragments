@@ -1,6 +1,6 @@
 /**
  * Ryan Hayes
- * 2/27/20
+ * 3/30/20
  * ResultActivity.java
  *
  * This class handles the activity where the currency conversion is displayed.
@@ -16,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.MenuItem;
-import android.widget.TextView;
 
 public class ResultActivity extends AppCompatActivity {
 
